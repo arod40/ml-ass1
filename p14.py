@@ -4,24 +4,6 @@ import matplotlib.pyplot as plt
 sign = lambda x: 1 if x >= 0 else -1
 
 
-def calculate_initial_w(data):
-    positives = [p for p, label in data if label == 1]
-    negatives = [p for p, label in data if label == -1]
-    d = len(positives[0])
-    w = []
-    avg_points = []
-    for i in range(d):
-        avg_pos_xi = sum([p[i] for p in positives]) / len(positives)
-        avg_neg_xi = sum([p[i] for p in negatives]) / len(negatives)
-
-        w.append(avg_pos_xi - avg_neg_xi)
-        avg_points.append((avg_pos_xi, avg_neg_xi))
-
-    w0 = sum([-(pi ** 2 - ni ** 2) / 2 for pi, ni in avg_points])
-
-    return [w0] + w
-
-
 def linearly_separable_multidim(origin, box, n):
     w = [random() for _ in box]
     b = sum(
